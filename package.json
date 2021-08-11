@@ -1,0 +1,17 @@
+{
+  "name": "noughts-and-crosses",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.37.5",
+    "typescript": "^4.3.2",
+    "vite": "^2.4.4"
+  },
+  "dependencies": {
+    "simple-json-db": "^1.2.3"
+  }
+}

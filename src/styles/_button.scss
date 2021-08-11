@@ -1,0 +1,14 @@
+.btn {
+
+  --button-background-color: #ffffff;
+  --button-background-color-hover: #dbedff;
+
+  padding: var(--spacing-12) var(--spacing-28);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  background-color: var(--button-background-color);
+
+  &:hover {
+    --button-background-color: #dbedff;
+  }
+}

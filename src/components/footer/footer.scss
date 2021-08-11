@@ -1,0 +1,35 @@
+#footer {
+  margin-top: var(--sizing-80);
+
+  button {
+    width: 180px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      margin-right: 10px;
+      margin-left: -15px;
+      position: relative;
+
+      &::after {
+        bottom: 3px;
+      }
+      &::before {
+        top: 5px;
+      }
+
+      &::after, &::before {
+        content: ' ';
+        position: absolute;
+      }
+
+      &, &::after, &::before {
+        border-bottom: 2px solid black;
+        width: 15px;
+        display: block;
+      }
+    }
+  }
+}
