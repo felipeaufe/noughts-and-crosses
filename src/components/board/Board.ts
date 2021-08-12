@@ -1,6 +1,7 @@
 import { HTMLParser } from '../../util/DOMParse';
 import { PlayerEnum } from './board.enum';
 import { IScoreboard } from './board.interface';
+import { Notifications } from './notifications/Notifications';
 import html from './board.html?raw';
 import './board.scss';
 
@@ -13,6 +14,7 @@ export class Board {
   private _positions: Array<Element>[] = [[],[],[]];
   private _playedCount = 0;
   private _scoreboard: IScoreboard;
+  private _notification: Notifications;
 
   constructor () {
     this.element = HTMLParser(html);
@@ -27,6 +29,9 @@ export class Board {
         element: this.element.querySelector('#player-o .count') as Element
       } 
     }
+
+    this._notification = new Notifications();
+    this.element.appendChild(this._notification.element);
 
     this._initBoard();
   }
@@ -133,11 +138,13 @@ export class Board {
     const result = row.reduce((accumulator: number, current: number) => accumulator + current)
     
     if(result === 3) {
+      this._notification.winPlayerX();
       this._scoreboard.player_x.count++;
       this._scoreboard.player_x.element.innerHTML = this._scoreboard.player_x.count.toString();
     }
 
     if(result === -3) {
+      this._notification.winPlayerO();
       this._scoreboard.player_o.count++;
       this._scoreboard.player_o.element.innerHTML = this._scoreboard.player_o.count.toString();
     }
@@ -160,6 +167,7 @@ export class Board {
     }));
 
     if(isFinished) {
+      this._notification.tiePlayers();
       this._resetBoard();
     }
   }

@@ -1,0 +1,39 @@
+#notifications {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--color-blue-10);
+  display: none;
+  justify-content: center;
+  padding-top: 82px;
+
+  &.enable {
+    display: flex;
+  }
+
+  > div {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  p {
+    text-align: center;
+    margin: 0;
+    text-align: center;
+    margin: 0;
+    font-weight: 600;
+    
+    &:first-child {
+      font-size: 6rem;
+      line-height: 6rem;
+    }
+    &:last-child {
+      font-size: 2.5rem;
+    }
+  }
+}
