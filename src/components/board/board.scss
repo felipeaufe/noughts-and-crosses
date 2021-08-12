@@ -6,6 +6,10 @@
     margin: 0 auto;
     background-color: var(--color-blue-15);
 
+    &.block {
+      pointer-events: none;
+    }
+
     > div {
       display: flex;
   
@@ -34,7 +38,7 @@
   }
 
   .corrent-player {
-    margin: 50px 0;
+    margin: var(--spacing-30) 0;
 
     text-align: center;
     p {
@@ -50,7 +54,7 @@
   }
   .scoreboard {
     display: flex;
-    margin-bottom: 50px;
+    margin-bottom: var(--spacing-30);
 
     #player-x,
     #player-o {

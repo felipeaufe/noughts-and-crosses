@@ -1,7 +1,8 @@
 import { HTMLParser } from '../../util/DOMParse';
-import { PlayerEnum } from './board.enum';
+import { PlayerEnum, DifficultyEnum } from './board.enum';
 import { IScoreboard } from './board.interface';
 import { Notifications } from './notifications/Notifications';
+import { Difficulty } from './difficulty/Difficulty';
 import html from './board.html?raw';
 import './board.scss';
 
@@ -13,8 +14,10 @@ export class Board {
   private _currentPlayerElement: Element;
   private _positions: Array<Element>[] = [[],[],[]];
   private _playedCount = 0;
+  private _difficulty: Element;
   private _scoreboard: IScoreboard;
   private _notification: Notifications;
+  private _currentDifficulty: DifficultyEnum = DifficultyEnum.EASY;
 
   constructor () {
     this.element = HTMLParser(html);
@@ -32,7 +35,11 @@ export class Board {
 
     this._notification = new Notifications();
     this.element.appendChild(this._notification.element);
+    
+    this._difficulty = new Difficulty().element;
+    this.element.insertBefore(this._difficulty, this.element.firstChild);
 
+    this._setDifficulty();
     this._initBoard();
   }
 
@@ -56,7 +63,6 @@ export class Board {
       item.addEventListener('click', (event) => this._onClick(event.target as Element));
     });
   }
-
 
   /**
    * Click capture and validate if the field of play is valid
@@ -86,12 +92,23 @@ export class Board {
   /**
    * Toggle player
    */
-  private _changePlayer() {
-    this._currentPlayer = this._currentPlayer !== PlayerEnum.PLAYER_X 
-      ? PlayerEnum.PLAYER_X
-      : PlayerEnum.PLAYER_O;
+  private _changePlayer(player?: PlayerEnum) {
 
-      this._currentPlayerElement.innerHTML = this._currentPlayer;
+    if(player) {
+      this._currentPlayer = player;
+    } else {
+      this._currentPlayer = this._currentPlayer !== PlayerEnum.PLAYER_X 
+        ? PlayerEnum.PLAYER_X
+        : PlayerEnum.PLAYER_O;
+    }
+
+    this._currentPlayerElement.innerHTML = this._currentPlayer;
+
+    if(this._currentDifficulty !== DifficultyEnum.VERSUS && this._currentPlayer === PlayerEnum.PLAYER_O) {
+      this.element.querySelector('.board')?.classList.add('block');
+    } else {
+      this.element.querySelector('.board')?.classList.remove('block');
+    }
   }
 
   /**
@@ -177,7 +194,16 @@ export class Board {
    */
   private _resetBoard(): void {
     setTimeout(() => {
+      this._changePlayer(PlayerEnum.PLAYER_X);
       this._positions.forEach((row: Array<Element>) => row.forEach((element: Element) => element.innerHTML = ''));
+
     }, 300);
   };
+
+  /**
+   * Set difficulty
+   */
+  private _setDifficulty (): void {
+    this._currentDifficulty = DifficultyEnum.EASY;
+  }
 }

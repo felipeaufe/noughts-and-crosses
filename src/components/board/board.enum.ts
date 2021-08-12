@@ -8,3 +8,10 @@ export enum WinDescriptionEnum {
     WINNER = 'Winner',
     TIE = 'Tie'
 }
+
+export enum DifficultyEnum {
+  EASY = 'Easy',
+  MEDIUM = 'Medium',
+  HARD = 'Hard',
+  VERSUS = 'Versus'
+}
