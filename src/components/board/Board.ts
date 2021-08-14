@@ -1,8 +1,11 @@
 import { HTMLParser } from '../../util/DOMParse';
-import { PlayerEnum, DifficultyEnum } from './board.enum';
-import { IScoreboard } from './board.interface';
+import { PlayerEnum } from '../../enums/board.enum';
+import { DifficultyEnum } from '../../enums/difficulty.enum';
+import { IScoreboard } from '../../interfaces/board.interface';
 import { Notifications } from './notifications/Notifications';
 import { Difficulty } from './difficulty/Difficulty';
+import { store } from '../../sotre';
+import { Observer } from '../../util/Observer';
 import html from './board.html?raw';
 import './board.scss';
 
@@ -17,7 +20,6 @@ export class Board {
   private _difficulty: Element;
   private _scoreboard: IScoreboard;
   private _notification: Notifications;
-  private _currentDifficulty: DifficultyEnum = DifficultyEnum.EASY;
 
   constructor () {
     this.element = HTMLParser(html);
@@ -39,8 +41,11 @@ export class Board {
     this._difficulty = new Difficulty().element;
     this.element.insertBefore(this._difficulty, this.element.firstChild);
 
-    this._setDifficulty();
     this._initBoard();
+
+    store.watch.observe(() => {
+      this.resetBoard();
+    });
   }
 
   /**
@@ -104,9 +109,12 @@ export class Board {
 
     this._currentPlayerElement.innerHTML = this._currentPlayer;
 
-    if(this._currentDifficulty !== DifficultyEnum.VERSUS && this._currentPlayer === PlayerEnum.PLAYER_O) {
+    console.log(store.state.difficulty);
+    if(store.state.difficulty !== DifficultyEnum.VERSUS && this._currentPlayer === PlayerEnum.PLAYER_O) {
+      // Player Vs IA
       this.element.querySelector('.board')?.classList.add('block');
     } else {
+      // Player Vs Player
       this.element.querySelector('.board')?.classList.remove('block');
     }
   }
@@ -167,7 +175,7 @@ export class Board {
     }
 
     if(result === 3 || result === -3) {
-      this._resetBoard();
+      this.resetBoard();
     }
   }
 
@@ -185,25 +193,18 @@ export class Board {
 
     if(isFinished) {
       this._notification.tiePlayers();
-      this._resetBoard();
+      this.resetBoard();
     }
   }
 
   /**
    * Reset board
    */
-  private _resetBoard(): void {
+  public resetBoard(): void {
     setTimeout(() => {
       this._changePlayer(PlayerEnum.PLAYER_X);
       this._positions.forEach((row: Array<Element>) => row.forEach((element: Element) => element.innerHTML = ''));
 
     }, 300);
   };
-
-  /**
-   * Set difficulty
-   */
-  private _setDifficulty (): void {
-    this._currentDifficulty = DifficultyEnum.EASY;
-  }
 }

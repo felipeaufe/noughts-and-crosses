@@ -1,6 +1,7 @@
 import { HTMLParser } from '../../../util/DOMParse';
-import { DifficultyEnum } from '../board.enum';
+import { DifficultyEnum } from '../../../enums/difficulty.enum';
 import html from './difficulty.html?raw';
+import { store } from '../../../sotre';
 import './difficulty.scss';
 
 export class Difficulty {
@@ -30,7 +31,7 @@ export class Difficulty {
     
     select.addEventListener('change', (event: any) => {
       const value = event.target.value;
-      console.log({value});
+      store.setDifficulty(value);
     })
   }
 }

@@ -9,9 +9,3 @@ export enum WinDescriptionEnum {
     TIE = 'Tie'
 }
 
-export enum DifficultyEnum {
-  EASY = 'Easy',
-  MEDIUM = 'Medium',
-  HARD = 'Hard',
-  VERSUS = 'Versus'
-}
