@@ -3,7 +3,7 @@ import { PlayerEnum, WinDescriptionEnum } from '../../../enums/board.enum';
 import html from './notifications.html?raw';
 import './notifications.scss';
 
-export class Notifications {
+export class NotificationsController {
   
   public element: Element;
   private _player: Element;

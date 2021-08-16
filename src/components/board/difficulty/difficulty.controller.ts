@@ -4,7 +4,7 @@ import html from './difficulty.html?raw';
 import { store } from '../../../sotre';
 import './difficulty.scss';
 
-export class Difficulty {
+export class DifficultyController {
   
   public element: Element;
 

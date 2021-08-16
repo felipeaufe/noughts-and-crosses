@@ -23,7 +23,12 @@ export class Observer {
     });
   }
 
-  public observe (notifyCallback: any) {
+  /**
+   * Callback function that will be fire when the attribute is updated.
+   * 
+   * @param notifyCallback Function
+   */
+  public observe (notifyCallback: any): void {
     this._observers.push(notifyCallback);
   }
 }

@@ -1,8 +1,8 @@
 import { HTMLParser } from '../../util/DOMParse';
-import html from './header.html?raw';
-import './header.scss';
+import html from './footer.html?raw';
+import './footer.scss';
 
-export class Header {
+export class FooterController {
   
   public element: Element;
 

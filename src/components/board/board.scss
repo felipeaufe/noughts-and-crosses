@@ -38,9 +38,11 @@
   }
 
   .corrent-player {
+    display: flex;
+    justify-content: center;
     margin: var(--spacing-30) 0;
-
     text-align: center;
+
     p {
       margin: 0 0 10px;
       font-size: 1.3rem;
@@ -50,6 +52,7 @@
     span {
       font-size: 1.5rem;
       font-weight: 600;
+      width: var(--spacing-30);
     }
   }
   .scoreboard {

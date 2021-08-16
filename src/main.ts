@@ -1,11 +1,11 @@
-import { Header } from './components/header/Header';
-import { Board } from './components/board/Board';
-import { Footer } from './components/footer/Footer';
+import { HeaderController } from './components/header/header.controller';
+import { BoardController } from './components/board/board.controller';
+import { FooterController } from './components/footer/footer.controller';
 
 import './styles/base.scss';
 
 const app: HTMLElement = document.querySelector<HTMLElement>('#app') || document.createElement('div');
 
-app.appendChild(new Header().element)
-app.appendChild(new Board().element)
-app.appendChild(new Footer().element)
+app.appendChild(new HeaderController().element);
+app.appendChild(new BoardController().element);
+app.appendChild(new FooterController().element);

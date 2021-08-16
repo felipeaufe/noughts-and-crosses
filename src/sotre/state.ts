@@ -1,19 +1,9 @@
-import { DifficultyEnum } from '../enums/difficulty.enum'
-import { Observer } from '../util/Observer';
+import { DifficultyEnum } from '../enums/difficulty.enum';
+import { PlayerEnum } from '../enums/board.enum';
 
-let state = {
-  difficulty: DifficultyEnum.EASY
-};
-
-export const store = {
-  state,
-  setDifficulty (difficulty: DifficultyEnum) {
-    this.state = {
-      ...this.state,
-      difficulty
-    }
+export const state = {
+  difficulty: DifficultyEnum.EASY,
+  player: {
+    current: PlayerEnum.PLAYER_X
   },
-  watch: null as any
 };
-
-store.watch = new Observer(store, 'state');
