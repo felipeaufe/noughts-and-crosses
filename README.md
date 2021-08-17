@@ -29,13 +29,16 @@ Technologies used in the project
 ### How to play
 
 1. The game will already start in Easy mode, but it can easily be changed to the difficulty you want, using the difficulty selection button.
+
 ![](https://github.com/felipeaufe/noughts-and-crosses/blob/main/doc/screenshot_1.png?raw=true)
 
 
 2. Player X will always be the real player, and player 0 the AI.
+
 ![](https://github.com/felipeaufe/noughts-and-crosses/blob/main/doc/screenshot_2.png?raw=true)
 
 3. You can also select the Versus option and play with a friend.
+
 ![](https://github.com/felipeaufe/noughts-and-crosses/blob/main/doc/screenshot_3.png?raw=true)
 
 # Project Structure
