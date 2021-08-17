@@ -7,12 +7,18 @@ export class Winner {
   /**
    * Check the possible lines on the board
    */
-  public static checkBoardWin(positions: Array<Element>[] = [[],[],[]]): PlayerEnum | Boolean {
+  public static checkBoardWin(positions: Array<Array<Element>> | Array<Array<String>>): PlayerEnum | Boolean {
     
-    const result = positions.map((row: Array<Element>) => row.map((item: Element) => {
-      if(item.innerHTML === PlayerEnum.PLAYER_X) {
+    const result = positions.map((row: Array<Element> | Array<String>) => row.map((item: Element | String | any) => {
+      let value = item;
+      
+      if(typeof item !== "string") {
+        value = item.innerHTML;
+      }
+
+      if(value === PlayerEnum.PLAYER_X) {
         return 1;
-      } else if(item.innerHTML === PlayerEnum.PLAYER_O) {
+      } else if(value === PlayerEnum.PLAYER_O) {
         return -1;
       }
 

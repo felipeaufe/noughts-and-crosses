@@ -1,7 +1,7 @@
 import { HTMLParser } from '../../../util/DOMParse';
 import { DifficultyEnum } from '../../../enums/difficulty.enum';
 import html from './difficulty.html?raw';
-import { store } from '../../../sotre';
+import { store } from '../../../store';
 import './difficulty.scss';
 
 export class DifficultyController {

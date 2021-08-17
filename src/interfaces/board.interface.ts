@@ -7,3 +7,8 @@ interface IPlayer {
   count: number,
   element: Element
 }
+
+export interface IBotMove {
+  row: number,
+  column: number,
+}

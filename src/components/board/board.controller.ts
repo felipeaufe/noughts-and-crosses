@@ -1,11 +1,12 @@
 import { HTMLParser } from '../../util/DOMParse';
 import { PlayerEnum } from '../../enums/board.enum';
 import { DifficultyEnum } from '../../enums/difficulty.enum';
-import { IScoreboard } from '../../interfaces/board.interface';
+import { IBotMove, IScoreboard } from '../../interfaces/board.interface';
 import { NotificationsController } from './notifications/notifications.controller';
 import { DifficultyController } from './difficulty/difficulty.controller';
-import { store } from '../../sotre';
+import { store } from '../../store';
 import { Winner } from './winner';
+import { BotPlayer } from './BotPlayer';
 import html from './board.html?raw';
 import './board.scss';
 
@@ -16,9 +17,10 @@ export class BoardController {
   private _currentPlayerElement: Element;
   private _positions: Array<Element>[] = [[],[],[]];
   private _playsCount = 0;
-  private _difficulty: Element;
+  private _difficultyElement: Element;
   private _scoreboard: IScoreboard;
   private _notification: NotificationsController;
+  private _botPlayer: BotPlayer;
 
   constructor () {
     this.element = HTMLParser(html);
@@ -37,13 +39,15 @@ export class BoardController {
     this._notification = new NotificationsController();
     this.element.appendChild(this._notification.element);
     
-    this._difficulty = new DifficultyController().element;
-    this.element.insertBefore(this._difficulty, this.element.firstChild);
+    this._difficultyElement = new DifficultyController().element;
+    this.element.insertBefore(this._difficultyElement, this.element.firstChild);
+
+    this._botPlayer = new BotPlayer();
 
     this._initBoard();
 
     store.watches.difficulty.observe(() => {
-      this.resetBoard();
+      this._resetBoard();
     });
   }
 
@@ -89,8 +93,10 @@ export class BoardController {
   private _setPlayed(element: Element): void {
     element.innerHTML = store.getCurrentPlayer();
     this._playsCount++;
-    this._changePlayer();
-    this._checkBoardWin();
+
+    if(!this._checkBoardWin()) {
+      this._changePlayer();
+    }
   }
 
   /**
@@ -110,8 +116,8 @@ export class BoardController {
     this._currentPlayerElement.innerHTML = store.getCurrentPlayer();
 
     if(store.getDifficulty() !== DifficultyEnum.VERSUS && store.getCurrentPlayer() === PlayerEnum.PLAYER_O) {
-      // Player Vs IA
       this.element.querySelector('.board')?.classList.add('block');
+      this._botMovePlay();
     } else {
       // Player Vs Player
       this.element.querySelector('.board')?.classList.remove('block');
@@ -121,7 +127,7 @@ export class BoardController {
   /**
    * Check the possible lines on the board
    */
-  private _checkBoardWin(): void {
+  private _checkBoardWin(): Boolean {
     if(this._playsCount >= 3) {
       const winner = Winner.checkBoardWin(this._positions);
 
@@ -142,15 +148,30 @@ export class BoardController {
           this._notification.tiePlayers();
         }
   
-        this.resetBoard();
+        this._resetBoard();
+
+        return true;
       }
     }
+
+    return false;
+  }
+
+  /**
+   * Make a move by the bot
+   */
+  private _botMovePlay (): void {
+    setTimeout(() => {
+      const movement: IBotMove = this._botPlayer.chooseMove(this._positions, false);
+
+      this._setPlayed(this._positions[movement.row][movement.column]);
+    }, 300)
   }
 
   /**
    * Reset board
    */
-  public resetBoard(): void {
+  private _resetBoard(): void {
     setTimeout(() => {
       this._changePlayer(PlayerEnum.PLAYER_X);
       this._positions.forEach((row: Array<Element>) => row.forEach((element: Element) => element.innerHTML = ''));
