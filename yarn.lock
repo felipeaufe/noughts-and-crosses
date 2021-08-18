@@ -109,6 +109,11 @@ is-number@^7.0.0:
   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
   integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
 
+local-storage-db@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/local-storage-db/-/local-storage-db-1.0.0.tgz#290eba862eab68ecf1ef06dfe72c60c4dfb7e12a"
+  integrity sha1-KQ66hi6raOzx7wbf5yxgxN+34So=
+
 nanoid@^3.1.23:
   version "3.1.23"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
@@ -166,11 +171,6 @@ sass@^1.37.5:
   integrity sha512-Cx3ewxz9QB/ErnVIiWg2cH0kiYZ0FPvheDTVC6BsiEGBTZKKZJ1Gq5Kq6jy3PKtL6+EJ8NIoaBW/RSd2R6cZOA==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
-
-simple-json-db@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/simple-json-db/-/simple-json-db-1.2.3.tgz#ea7256bbbb1205b4af079f9bed2611e33401bce7"
-  integrity sha512-eL8u7YkcHidSaUvmolPooTPjxvMYd+IglSaxjnf13Tg1KQXcpoXlLOa38n4LillfQhgJuCgmUbCYERPl5fmY+w==
 
 source-map-js@^0.6.2:
   version "0.6.2"

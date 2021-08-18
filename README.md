@@ -17,7 +17,7 @@ Technologies used in the project
 
 `SASS`: As CCS compiler to optimize writing style files.
 
-`LocalDB`: As a database, in order to simplify the use of the application and test code and structure.
+`Local Storage DB`: As a database, in order to simplify the use of the application and test code and structure.
 
 
 ## Starting the game

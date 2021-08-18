@@ -12,6 +12,6 @@
     "vite": "^2.4.4"
   },
   "dependencies": {
-    "simple-json-db": "^1.2.3"
+    "local-storage-db": "^1.0.0"
   }
 }

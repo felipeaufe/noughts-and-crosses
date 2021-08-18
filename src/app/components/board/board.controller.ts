@@ -7,6 +7,7 @@ import { DifficultyController } from './difficulty/difficulty.controller';
 import { store } from '../../store';
 import { Winner } from './winner';
 import { BotPlayer } from './BotPlayer';
+import { BoardService } from './board.service';
 import html from './board.html?raw';
 import './board.scss';
 
@@ -147,6 +148,14 @@ export class BoardController {
         if(winner === PlayerEnum.PLAYER_XO) {
           this._notification.tiePlayers();
         }
+
+        if(winner !== PlayerEnum.PLAYER_XO) {
+          BoardService.setHistoric(
+            (winner as PlayerEnum),
+            store.getDifficulty(),
+            this._positions
+          )
+        } 
   
         this._resetBoard();
 
